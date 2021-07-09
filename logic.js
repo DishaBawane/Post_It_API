@@ -23,9 +23,11 @@ const getData =() =>{
       axios.request(reqOptions).then(function (response) {
       console.log(response.data);
         
-      for(let postData of response.data){
-        console.log(postData);
-        let date=postData.createdAt.slice(0,10);
+      for(let postData of response.data.results){
+        //console.log(postData);
+       let date = postData.createdAt.slice(0,10);
+             
+      // console.log(date);
         
         const cardTemplate = `
         <div class="card">
@@ -36,7 +38,7 @@ const getData =() =>{
             <div>
               <div class="title_date_post">
                 <h2 class="title_post">${postData.title}</h2>
-                <p class="date">${createdAt}<p>
+                <p class="date">${date}<p>
               </div>
               <div class="description_post">
                 <p class="description">${postData.description}</p>
@@ -62,35 +64,35 @@ const getData =() =>{
 
   };
 
- 
-// let headersListPost = {
-//   "X-Parse-Application-Id": "MVV6avTp",
-//   "Content-Type": "application/json",
-//  }
- 
-//  let reqOptionsPost = {
-//    url: "https://peerup-web-dev-srv.herokuapp.com/parse/classes/PostIt",
-//    method: "POST",
-//    headers: headersListPost,
-//    data: {  "title": "HomeKit",
-//      "description": "HomeKit control",
-//      "category": "Tech",
-//      "image": "https://images."},
-//  }
- 
-//  axios.request(reqOptionsPost).then(function (response) {
-//    console.log(response.data);
-//  }).catch((err)=>{
-//     console.log("error");
-//  });
 
 
-
+const postData =() =>{
+let headersListPost = {
+  "X-Parse-Application-Id": "MVV6avTp",
+  "Content-Type": "application/json",
+ }
  
+ let reqOptionsPost = {
+   url: "https://peerup-web-dev-srv.herokuapp.com/parse/classes/PostIt",
+   method: "POST",
+   headers: headersListPost,
+   data: {  "title": "HomeKit",
+     "description": "HomeKit control",
+     "category": "Tech",
+     "image": "https://source.unsplash.com/WLUHO9A_xik/1600x900"},
+ }
+ 
+ axios.request(reqOptionsPost).then(function (response) {
+   console.log(response.data);
+ }).catch((err)=>{
+    console.log("error");
+ });
+
+}
 postBtn.addEventListener("click", () => {
-  getData();
-  userEnterText.value = " ";
-  userEnterUrl.value = " ";
+  postData();
+  // userEnterText.value = " ";
+  // userEnterUrl.value = " ";
 
 });
 
