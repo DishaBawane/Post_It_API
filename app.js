@@ -5,7 +5,17 @@ let userEnterUrl = document.querySelector(".userimgurl");
 let category = document.querySelector(".category_get");
 let postBtn = document.querySelector(".postbtn");
 
+window.addEventListener("load", (event) => {
+    getData();
+  });
+  
+  
 const postData = async() => {
+
+    if (title.length === 0 && imgUrl.length === 0 ) {
+        alert("Please give valid data");
+        return ;
+      }
 
    try { 
      
@@ -57,8 +67,7 @@ const getData=async()=>{
         data:{} ,
       });
       console.log(response.data)
-    //   response.data.results.forEach((postdata) => display(postdata));
-    for(let postdata of response.data.results){
+        for(let postdata of response.data.results.reverse()){
         //console.log(postData);
         let date = postdata.createdAt.slice(0,10);
                             
